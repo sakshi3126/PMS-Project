@@ -1,0 +1,51 @@
+
+    <div class="container">
+      <div class="col-sm-8 col-sm-offset-2">
+        <%= simple_form_for(@task, local: true) do |f| %>
+          <%= f.hidden_field :user_id, value: @user.id %>
+          <%= f.hidden_field :project_id%>
+          <div class="form-group">
+          <%= f.error_notification %>
+          <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+          <div class="card">
+            <div class="card-header">
+              <div class="form-group">
+                <%= f.label :name, class: "control-label" %>
+                <%= f.text_field :name, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :description, class: "control-label" %>
+                <%= f.text_field :description, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :task_status, class: "control-label" %>
+                <%= f.select :task_status, Task.task_statuses.keys, {}, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :priority, class: "control-label" %>
+                <%= f.select :priority, Task.priorities.keys, {}, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :due_date, class: "control-label" %>
+                <%= f.date_select :task_date, :order => [:month, :day, :year], class: "form-control" %>
+              </div>
+<!--              <div class="form-group">-->
+                <%#= f.association :project, include_blank: false, input_html: {class: 'control-label select2-single'} %>
+<!--              </div>-->
+<!--              <div class="form-group">-->
+                <%#= f.association :user, include_blank: false, input_html: {class: 'control-label select2-single'} %>
+<!--              </div>-->
+            </div>
+            <div class="card-footer">
+              <div class="form-group text-center">
+                <%= f.submit class: "btn btn-primary btn-block mb-2" %>
+              </div>
+              <div class="form-group text-center">
+                 <%= link_to 'Back', tasks_path, class: 'btn btn-primary btn-block mb-2' %>
+              </div>
+            </div>
+          </div>
+          </div>
+        <% end %>
+      </div>
+    </div>

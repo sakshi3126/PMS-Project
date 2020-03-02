@@ -1,0 +1,61 @@
+<div class="container">
+  <div class="col-sm-8 col-sm-offset-2">
+    <%= simple_form_for(@project, local: true) do |f| %>
+      <div class="card">
+        <div class="card-header">
+          <div class="form-group">
+            <%= f.label :name, class: "control-label" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :description, class: "control-label" %>
+            <%= f.text_field :description, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :due_date, class: "control-label" %>
+            <%= f.date_select :due_date, :order => [:month, :day, :year], class: "form-control" %>
+          </div>
+          <% if action_name == "new" %>
+          <div class="form-group">
+            <%= f.label :Task, "Add a Task", class: "control-label" %><br/>
+            <%= f.fields_for :tasks do |task_field| %>
+              <div class="form-group">
+                <%= f.label :task_name, class: "control-label" %>
+              <%= task_field.text_field :name, label: 'Title', class: "form-control" %>
+              </div>
+              <div class="form-group">
+              <%= f.label :description, class: "control-label" %>
+              <%= task_field.text_area :description, rows: 3, class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.label :Status, class: "control-label" %>
+                <%= task_field.select :task_status, Task.task_statuses.keys, {}, class: 'form-control' %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :priority, class: "control-label" %>
+                <%= task_field.select :priority, Task.priorities.keys, {}, class: 'form-control' %>
+              </div>
+              <div class="form-group">
+                <%= f.label :task_due_date, class: "control-label" %>
+              <%= task_field.date_select :task_date, :order => [:month, :day, :year], class: "form-control" %>
+              </div>
+              <%= task_field.hidden_field :user_id, value: @user.id %>
+              <%#= task_field.hidden_field :project_id, value: @project.id %>
+            <% end %>
+          </div>
+            <% end %>
+        </div>
+        <div class="card-footer">
+          <div class="form-group text-center">
+            <%= f.hidden_field :user_id, value: @user.id %>
+            <%= f.submit class: "btn btn-primary btn-block mb-2" %>
+          </div>
+          <div class="form-group text-center">
+            <%= link_to 'Back', projects_path, class: 'btn btn-primary btn-block mb-2' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

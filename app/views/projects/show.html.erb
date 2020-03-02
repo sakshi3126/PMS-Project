@@ -1,0 +1,149 @@
+
+<div class="main-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <section class="pt-3 pt-lg-4 pb-2">
+          <div class="d-md-flex justify-content-between">
+            <h3 class="display-5 d-flex align-items-center">
+              Project Number #<%= @project.id %>
+            </h3>
+            <a href="<%= edit_project_path(@project) %>" class="btn btn-primary btn-rounded align-self-center btn-block-sm-down"><i class="fal fa-pen mr-1"></i>
+              Edit Project</a>
+            <a href="<%= new_project_task_path(@project) %>" class="btn btn-primary btn-rounded align-self-center btn-block-sm-down"><i class="fal fa-pen mr-1"></i>
+              New Task</a>
+          </div>
+        </section>
+        <h3 class="text-uppercase text-black-50 pb-5 text-center">Product Details</h3></br>
+        <div class="card">
+          <div class="card-alternative mt-3">
+            <div class=form-row>
+              <div class="col-6 col-md-4">
+                <strong class="d-block">Project Name #</strong>
+                <%= @project.name %>
+              </div>
+              <div class="col-6 col-md-4">
+                <strong class="d-block">Description :</strong>
+                <%= @project.description %>
+              </div>
+
+              <div class="col-6 col-md-4">
+                <strong class="d-block">Project Date :</strong>
+                <%= @project.due_date %>
+              </div>
+            </div>
+            <div class=form-row>
+              <div class="col-6 col-md-4">
+                <strong class="d-block">Status</strong>
+                <%= @project.status %>
+              </div>
+
+              <div class="col-6 col-md-4">
+                <strong class="d-block">Created At</strong>
+                <%= @project.created_at %>
+              </div>
+              <div class="col-6 col-md-4">
+                <strong class="d-block">Created By</strong>
+                <%= @project.user.name %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-top: 5%;">
+          <% if @project.tasks.present? %>
+            <div class="card mb-2">
+              <div class="card-body">
+
+                <table class="table table-bordered dt-responsive wrap-whitespace w-100 datatable m-0" data-fixed-header="false" data-sort="false">
+                  <thead>
+                  <tr>
+                    <th class="no-sort">Sr. No.</th>
+                    <th class="no-sort">Task</th>
+                    <th class="no-sort">description</th>
+                    <th class="no-sort">status</th>
+                    <th class="no-sort">priority</th>
+                    <th class="no-sort">due_date</th>
+                    <th class="no-sort">Assigned</th>
+                    <th>Actions</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @project.tasks.reverse.each_with_index do |row, sr_no| %>
+                    <% if row.project.present? %>
+
+                      <tr>
+                        <td><%= sr_no + 1 %></td>
+                        <td><%= row.name %> </td>
+                        <td><%= row.description %></td>
+                        <td><%= row.task_status %></td>
+                        <td><%= row.priority %></td>
+                        <td><%= row.task_date %></td>
+                        <td><%= row.user.name %></td>
+                        <td>
+                          <a class="btn btn-primary" href="<%= edit_task_path(row) %>" role="button">Edit</a>
+                          <%= link_to 'Destroy', row, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-primary' %>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-id= "<%= @project.id %>" data-target="#statusModal"x>Update
+                            Status
+                          </button>
+                        </td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <% end %>
+          <div class="col-6 col-md-3">
+            <div class="modal fade" id="statusModal" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Update Task</h4>
+                  </div>
+                  <div class="modal-body">
+                    <%= simple_form_for([@project], :url => update_task_project_path(@project)) do |f| %>
+                      <div class="error bg-danger text-white mb-3 px-1 rounded"></div>
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="form-row">
+                            <div class="col">
+                              <%= f.fields_for :tasks, f.object.tasks.build() do |task| %>
+                                <%= task.hidden_field :user_id, value: @user.id %>
+                                <%=task.hidden_field :project_id%>
+                                <%= task.label :task_name, class: "control-label" %>
+                                <%= task.text_field :name, label: 'Title', class: "form-control" %>
+                                <%= task.label :description, class: "control-label" %>
+                                <%= task.text_area :description, rows: 3, class: "form-control" %>
+                                <%= task.label :Status, class: "control-label" %>
+                                <%= task.select :task_status, Task.task_statuses.keys, {}, class: 'form-control' %>
+                                <%= task.label :priority, class: "control-label" %>
+                                <%= task.select :priority, Task.priorities.keys, {}, class: 'form-control' %>
+                                <%= task.label :task_due_date, class: "control-label" %>
+                                <%= task.date_select :task_date, :order => [:month, :day, :year], class: "form-control" %>
+                              <% end %>
+                            </div>
+                          </div>
+                          <div class="form-row mb-2 mt-0 ml-0">
+                            <button type="submit" class="btn btn-primary">
+                              Add Task
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>

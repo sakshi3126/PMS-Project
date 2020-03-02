@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+<ul class="text-info mb-3">
+    <h2 class="text-info text-center mb-6">Project List</h2>
+</ul>
+<div class="container">
+  <div class="row">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+        <thead>
+        <tr>
+          <th>Actions</th>
+          <th scope="col">Project</th>
+          <th scope="col">Project Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+          <th scope="col">Due Date</th>
+          <th scope="col">Created By</th>
+          <th scope="col">Created At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td>
+              <a class="btn btn-primary" href="<%=project_path(project) %>" role="button">View</a>
+              <a class="btn btn-primary" href="<%=edit_project_path(project) %>" role="button">Edit</a>
+              <a class="btn btn-primary" href="<%=project_tasks_path(project) %>" role="button">Task</a>
+              <%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary' %>
+            </td>
+            <td><%= project.id%></td>
+            <td><%= link_to project.name, project_path(project) %></td>
+            <td><%= project.description %></td>
+            <td><%= project.status.capitalize %></td>
+            <td><%= project.due_date %></td>
+            <td><%= project.user.name %></td>
+            <td><%= project.created_at %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
