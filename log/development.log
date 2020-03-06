@@ -21528,3 +21528,134 @@ Processing by ProjectsController#show as HTML
 Completed 200 OK in 54ms (Views: 47.7ms | ActiveRecord: 1.8ms)
 
 
+Started GET "/" for ::1 at 2020-03-06 13:00:50 +0530
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sakshi/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.4.1/lib/active_record/log_subscriber.rb:98
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (89.7ms)
+  Rendered layouts/navigation/_header.html.erb (0.7ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (1.2ms)
+  Rendered layouts/_navigation.html.erb (5.3ms)
+Completed 200 OK in 645ms (Views: 612.8ms | ActiveRecord: 6.9ms)
+
+
+Started POST "/users/sign_in" for ::1 at 2020-03-06 13:01:14 +0530
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Si+kq4VtXHD7lrMHCiXiP9qqmuFMFSdSRyn1V9HAvFmBwGcjXmP0iEeiuZKD7oBzo1Dh0bBiQ36U16UcT5P2Ng==", "user"=>{"email"=>"nikhil@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (95.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "nikhil@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+Redirected to http://localhost:3000/
+Completed 302 Found in 441ms (ActiveRecord: 95.7ms)
+
+
+Started GET "/" for ::1 at 2020-03-06 13:01:14 +0530
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ /home/sakshi/.rvm/gems/ruby-2.5.3/gems/activerecord-5.2.4.1/lib/active_record/log_subscriber.rb:98
+Processing by ProjectsController#index as HTML
+  Rendering projects/index.html.erb within layouts/application
+  [1m[36mProject Load (16.7ms)[0m  [1m[34mSELECT "projects".* FROM "projects" WHERE "projects"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/views/projects/index.html.erb:23
+  Rendered projects/index.html.erb within layouts/application (63.7ms)
+  Rendered layouts/navigation/_header.html.erb (0.8ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (1.1ms)
+  Rendered layouts/_navigation.html.erb (3.4ms)
+Completed 200 OK in 165ms (Views: 108.3ms | ActiveRecord: 28.2ms)
+
+
+Started GET "/projects/4/tasks" for ::1 at 2020-03-06 13:01:32 +0530
+Processing by TasksController#index as HTML
+  Parameters: {"project_id"=>"4"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:92
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (17.8ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1[0m  [["user_id", 2]]
+  ↳ app/views/tasks/index.html.erb:19
+  [1m[36mProject Load (0.3ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:25
+  [1m[36mCACHE Project Load (0.0ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/views/tasks/index.html.erb:25
+  Rendered tasks/index.html.erb within layouts/application (71.9ms)
+  Rendered layouts/navigation/_header.html.erb (0.3ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (0.6ms)
+  Rendered layouts/_navigation.html.erb (2.2ms)
+Completed 200 OK in 153ms (Views: 113.5ms | ActiveRecord: 29.4ms)
+
+
+Started GET "/projects/4/edit" for ::1 at 2020-03-06 13:01:49 +0530
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mProject Load (0.5ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:65
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (42.6ms)
+  Rendered projects/edit.html.erb within layouts/application (44.4ms)
+  Rendered layouts/navigation/_header.html.erb (1.0ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (0.7ms)
+  Rendered layouts/_navigation.html.erb (3.7ms)
+Completed 200 OK in 111ms (Views: 104.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/projects/4" for ::1 at 2020-03-06 13:03:48 +0530
+Processing by ProjectsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mProject Load (0.4ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:65
+  Rendering projects/show.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/projects/show.html.erb:47
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."project_id" = $1[0m  [["project_id", 4]]
+  ↳ app/views/projects/show.html.erb:53
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/projects/show.html.erb:81
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/projects/show.html.erb:81
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/projects/show.html.erb:81
+  Rendered projects/show.html.erb within layouts/application (39.3ms)
+  Rendered layouts/navigation/_header.html.erb (0.3ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (0.6ms)
+  Rendered layouts/_navigation.html.erb (2.3ms)
+Completed 200 OK in 88ms (Views: 82.0ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/projects/4/edit" for ::1 at 2020-03-06 13:04:25 +0530
+Processing by ProjectsController#edit as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (2.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mProject Load (1.4ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/projects_controller.rb:65
+  Rendering projects/edit.html.erb within layouts/application
+  Rendered projects/_form.html.erb (16.9ms)
+  Rendered projects/edit.html.erb within layouts/application (21.8ms)
+  Rendered layouts/navigation/_header.html.erb (0.4ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (0.7ms)
+  Rendered layouts/_navigation.html.erb (2.4ms)
+Completed 200 OK in 113ms (Views: 94.0ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/projects/4/tasks/new" for ::1 at 2020-03-06 13:04:34 +0530
+Processing by TasksController#new as HTML
+  Parameters: {"project_id"=>"4"}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12
+  [1m[36mProject Load (1.3ms)[0m  [1m[34mSELECT  "projects".* FROM "projects" WHERE "projects"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/tasks_controller.rb:92
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (32.5ms)
+  Rendered tasks/new.html.erb within layouts/application (35.3ms)
+  Rendered layouts/navigation/_header.html.erb (0.3ms)
+  Rendered layouts/navigation/_collapsible_elements.html.erb (1.0ms)
+  Rendered layouts/_navigation.html.erb (2.7ms)
+Completed 200 OK in 109ms (Views: 88.7ms | ActiveRecord: 2.6ms)
+
+
